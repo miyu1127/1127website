@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>自己紹介ページ</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f7f7f8;
+        --panel: #ffffff;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --accent: #2563eb;
+        --border: #e5e7eb;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.7;
+      }
+
+      .container {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 48px 20px 64px;
+      }
+
+      .hero {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 32px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+      }
+
+      h1 {
+        margin: 0 0 12px;
+        font-size: clamp(2rem, 4vw, 3rem);
+        line-height: 1.2;
+      }
+
+      .lead {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+
+      section {
+        margin-top: 24px;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px 32px;
+      }
+
+      h2 {
+        margin: 0 0 12px;
+        font-size: 1.2rem;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      .profile {
+        display: grid;
+        gap: 12px;
+      }
+
+      .item {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 12px;
+      }
+
+      .label {
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 640px) {
+        .hero,
+        section {
+          padding: 20px;
+          border-radius: 12px;
+        }
+
+        .item {
+          grid-template-columns: 1fr;
+          gap: 4px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <header class="hero">
+        <h1>こんにちは、[あなたの名前]です。</h1>
+        <p class="lead">
+          ここは私の自己紹介ページです。シンプルに、見やすく、自分らしさが伝わる内容にしています。
+        </p>
+      </header>
+
+      <section>
+        <h2>プロフィール</h2>
+        <div class="profile">
+          <div class="item">
+            <div class="label">名前</div>
+            <div>[あなたの名前]</div>
+          </div>
+          <div class="item">
+            <div class="label">出身</div>
+            <div>[出身地]</div>
+          </div>
+          <div class="item">
+            <div class="label">職業 / 学業</div>
+            <div>[職業や学校名]</div>
+          </div>
+          <div class="item">
+            <div class="label">趣味</div>
+            <div>[趣味をいくつか]</div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>好きなこと</h2>
+        <ul>
+          <li>[例] 音楽を聴くこと</li>
+          <li>[例] 旅行すること</li>
+          <li>[例] コーディングやデザインを触ること</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>ひとこと</h2>
+        <p>
+          [ここに自己紹介の一文を入れてください。]
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
