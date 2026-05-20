@@ -1,0 +1,167 @@
+:root {
+  color-scheme: light;
+  --bg-1: #f4ebe1;
+  --bg-2: #ead9c6;
+  --bg-3: #d8b899;
+  --panel: rgba(255, 248, 240, 0.72);
+  --panel-strong: rgba(255, 242, 227, 0.9);
+  --text: #4d3525;
+  --muted: #7b6454;
+  --border: rgba(118, 83, 58, 0.15);
+  --accent: #9a6641;
+  --accent-strong: #6f4631;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.7), transparent 36%),
+    linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 54%, var(--bg-3) 100%);
+  line-height: 1.8;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.22;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 90%);
+}
+
+.page {
+  width: min(880px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 56px 0 72px;
+}
+
+.hero,
+.panel {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--panel);
+  box-shadow: 0 18px 36px rgba(92, 60, 36, 0.12);
+  backdrop-filter: blur(10px);
+}
+
+.hero {
+  padding: 36px 34px 32px;
+}
+
+.panel {
+  margin-top: 22px;
+  padding: 26px 34px;
+}
+
+.panel.soft {
+  background: var(--panel-strong);
+}
+
+.panel.accent {
+  background: linear-gradient(180deg, rgba(255, 245, 234, 0.96), rgba(245, 223, 200, 0.92));
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+h1,
+h2,
+p,
+dl,
+ul {
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.18;
+  letter-spacing: 0;
+}
+
+.lead {
+  margin-top: 14px;
+  max-width: 44rem;
+  color: var(--muted);
+  font-size: 1.02rem;
+}
+
+h2 {
+  margin-bottom: 14px;
+  font-size: 1.15rem;
+  color: var(--accent-strong);
+}
+
+.profile {
+  display: grid;
+  gap: 14px;
+}
+
+.profile > div {
+  display: grid;
+  grid-template-columns: 128px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+dt {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+dd {
+  margin: 0;
+}
+
+.list {
+  padding-left: 20px;
+  color: var(--text);
+}
+
+.list li + li {
+  margin-top: 8px;
+}
+
+.accent p {
+  color: var(--text);
+}
+
+@media (max-width: 640px) {
+  .page {
+    width: min(100% - 20px, 880px);
+    padding: 20px 0 28px;
+  }
+
+  .hero,
+  .panel {
+    border-radius: 16px;
+    padding: 22px 18px;
+  }
+
+  .profile > div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}

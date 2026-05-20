@@ -3,257 +3,56 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>p5.js Tennis Ball Animation</title>
-    <style>
-      html,
-      body {
-        margin: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        background: #0d1320;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      }
-
-      canvas {
-        display: block;
-      }
-
-      .label {
-        position: fixed;
-        left: 16px;
-        bottom: 14px;
-        color: rgba(255, 255, 255, 0.78);
-        font-size: 13px;
-        pointer-events: none;
-        user-select: none;
-        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
-      }
-    </style>
-    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js"></script>
+    <title>自己紹介ページ</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="label">p5.js tennis ball animation</div>
-    <script>
-      const ball = {
-        x: 0,
-        y: 0,
-        vx: 220,
-        vy: -430,
-        r: 22,
-        spin: 0,
-      };
+    <main class="page">
+      <header class="hero">
+        <p class="eyebrow">About Me</p>
+        <h1>こんにちは、[あなたの名前]です。</h1>
+        <p class="lead">
+          ここは私の自己紹介ページです。やわらかい雰囲気で、落ち着いて読める構成にしています。
+        </p>
+      </header>
 
-      const trail = [];
-      const gravity = 980;
-      const floorBounce = 0.76;
-      const wallBounce = 0.92;
+      <section class="panel">
+        <h2>プロフィール</h2>
+        <dl class="profile">
+          <div>
+            <dt>名前</dt>
+            <dd>[あなたの名前]</dd>
+          </div>
+          <div>
+            <dt>出身</dt>
+            <dd>[出身地]</dd>
+          </div>
+          <div>
+            <dt>職業 / 学業</dt>
+            <dd>[職業や学校名]</dd>
+          </div>
+          <div>
+            <dt>趣味</dt>
+            <dd>[趣味をいくつか]</dd>
+          </div>
+        </dl>
+      </section>
 
-      function setup() {
-        createCanvas(windowWidth, windowHeight);
-        ball.x = width * 0.2;
-        ball.y = height * 0.4;
-        angleMode(RADIANS);
-        noStroke();
-      }
+      <section class="panel soft">
+        <h2>好きなこと</h2>
+        <ul class="list">
+          <li>[例] 音楽を聴くこと</li>
+          <li>[例] 旅行すること</li>
+          <li>[例] コーディングやデザインを触ること</li>
+        </ul>
+      </section>
 
-      function draw() {
-        drawBackground();
-        drawCourt();
-
-        const dt = min(deltaTime, 33.3) / 1000;
-        updateBall(dt);
-        drawTrail();
-        drawShadow();
-        drawBall();
-      }
-
-      function drawBackground() {
-        const topColor = color(15, 23, 42);
-        const bottomColor = color(9, 14, 24);
-        for (let y = 0; y < height; y += 3) {
-          const t = y / height;
-          const c = lerpColor(topColor, bottomColor, t);
-          stroke(c);
-          line(0, y, width, y);
-        }
-        noStroke();
-      }
-
-      function drawCourt() {
-        const courtW = min(width * 0.84, 920);
-        const courtH = min(height * 0.5, 420);
-        const courtX = width / 2;
-        const courtY = height * 0.67;
-
-        push();
-        translate(courtX, courtY);
-
-        fill(31, 84, 53);
-        rectMode(CENTER);
-        rect(0, 0, courtW + 24, courtH + 24, 18);
-
-        fill(58, 122, 74);
-        rect(0, 0, courtW, courtH, 16);
-
-        stroke(242, 244, 247, 220);
-        strokeWeight(3);
-        noFill();
-        rect(0, 0, courtW - 18, courtH - 18, 12);
-
-        const serviceY = courtH * 0.18;
-        const centerX = 0;
-        const leftServiceX = -courtW * 0.22;
-        const rightServiceX = courtW * 0.22;
-
-        line(-courtW * 0.49, 0, courtW * 0.49, 0);
-        line(leftServiceX, -courtH * 0.34, leftServiceX, courtH * 0.34);
-        line(rightServiceX, -courtH * 0.34, rightServiceX, courtH * 0.34);
-        line(centerX, -serviceY, centerX, serviceY);
-        line(-courtW * 0.49, -courtH * 0.34, -courtW * 0.49, courtH * 0.34);
-        line(courtW * 0.49, -courtH * 0.34, courtW * 0.49, courtH * 0.34);
-
-        stroke(214, 232, 218, 90);
-        strokeWeight(1);
-        for (let i = -6; i <= 6; i++) {
-          const x = map(i, -6, 6, -courtW * 0.46, courtW * 0.46);
-          line(x, -courtH * 0.42, x + 20, -courtH * 0.42 - 14);
-        }
-
-        stroke(243, 246, 250, 70);
-        strokeWeight(2);
-        line(-courtW * 0.5, -courtH * 0.5 - 2, courtW * 0.5, -courtH * 0.5 - 2);
-        line(-courtW * 0.5, courtH * 0.5 + 2, courtW * 0.5, courtH * 0.5 + 2);
-
-        noStroke();
-        fill(17, 28, 45, 120);
-        rect(0, courtH * 0.47, courtW * 0.96, 18, 9);
-
-        fill(255, 255, 255, 18);
-        ellipse(-courtW * 0.22, -courtH * 0.12, 160, 54);
-        ellipse(courtW * 0.24, courtH * 0.1, 200, 66);
-        pop();
-
-        drawNet(courtX, courtY, courtW, courtH);
-      }
-
-      function drawNet(cx, cy, courtW, courtH) {
-        push();
-        translate(cx, cy + 2);
-        stroke(245, 247, 250, 180);
-        strokeWeight(2);
-        line(-courtW * 0.5 + 12, 0, courtW * 0.5 - 12, 0);
-
-        stroke(255, 255, 255, 90);
-        strokeWeight(1);
-        for (let x = -courtW * 0.48; x <= courtW * 0.48; x += 18) {
-          line(x, -18, x, 18);
-        }
-        for (let y = -18; y <= 18; y += 6) {
-          line(-courtW * 0.48, y, courtW * 0.48, y);
-        }
-
-        stroke(255, 255, 255, 130);
-        strokeWeight(4);
-        line(-courtW * 0.5 + 12, -3, -courtW * 0.5 + 12, 3);
-        line(courtW * 0.5 - 12, -3, courtW * 0.5 - 12, 3);
-        pop();
-      }
-
-      function updateBall(dt) {
-        const courtW = min(width * 0.84, 920);
-        const courtH = min(height * 0.5, 420);
-        const floorY = height * 0.67 + courtH * 0.36;
-        const leftWall = width / 2 - courtW * 0.47;
-        const rightWall = width / 2 + courtW * 0.47;
-
-        ball.vy += gravity * dt;
-        ball.x += ball.vx * dt;
-        ball.y += ball.vy * dt;
-        ball.spin += ball.vx * dt * 0.07;
-
-        if (ball.x - ball.r < leftWall) {
-          ball.x = leftWall + ball.r;
-          ball.vx *= -wallBounce;
-        } else if (ball.x + ball.r > rightWall) {
-          ball.x = rightWall - ball.r;
-          ball.vx *= -wallBounce;
-        }
-
-        if (ball.y + ball.r > floorY) {
-          ball.y = floorY - ball.r;
-          ball.vy *= -floorBounce;
-          ball.vx *= 0.985;
-          if (abs(ball.vy) < 120) {
-            ball.vy = -260 - random(0, 80);
-          }
-        }
-
-        if (ball.y - ball.r < height * 0.1) {
-          ball.y = height * 0.1 + ball.r;
-          ball.vy *= -0.7;
-        }
-
-        trail.unshift({
-          x: ball.x,
-          y: ball.y,
-          life: 1,
-        });
-
-        if (trail.length > 18) {
-          trail.pop();
-        }
-
-        for (const point of trail) {
-          point.life -= dt * 1.7;
-        }
-      }
-
-      function drawTrail() {
-        noStroke();
-        for (let i = trail.length - 1; i >= 0; i--) {
-          const point = trail[i];
-          if (point.life <= 0) continue;
-          const alpha = 70 * point.life;
-          fill(194, 255, 112, alpha);
-          ellipse(point.x, point.y, ball.r * 1.15 * point.life, ball.r * 1.15 * point.life);
-        }
-      }
-
-      function drawShadow() {
-        const shadowY = height * 0.67 + min(height * 0.5, 420) * 0.36;
-        const air = constrain((shadowY - ball.y) / 240, 0, 1);
-        const w = lerp(34, 68, air);
-        const h = lerp(10, 22, air);
-        fill(0, 0, 0, 80 * (1 - air));
-        ellipse(ball.x + 8, shadowY + 6, w, h);
-      }
-
-      function drawBall() {
-        push();
-        translate(ball.x, ball.y);
-
-        fill(199, 255, 68);
-        ellipse(0, 0, ball.r * 2, ball.r * 2);
-
-        fill(172, 218, 53);
-        ellipse(-4, -6, ball.r * 1.7, ball.r * 1.7);
-
-        stroke(245, 255, 225);
-        strokeWeight(3);
-        noFill();
-        arc(-3, 0, ball.r * 1.8, ball.r * 1.8, -0.9 + ball.spin, 0.9 + ball.spin);
-        arc(4, 0, ball.r * 1.8, ball.r * 1.8, Math.PI - 0.9 + ball.spin, Math.PI + 0.9 + ball.spin);
-
-        noStroke();
-        fill(255, 255, 255, 48);
-        ellipse(-7, -8, ball.r * 0.75, ball.r * 0.75);
-        pop();
-      }
-
-      function windowResized() {
-        resizeCanvas(windowWidth, windowHeight);
-      }
-    </script>
+      <section class="panel accent">
+        <h2>ひとこと</h2>
+        <p>
+          [ここに自己紹介の一文を入れてください。]
+        </p>
+      </section>
+    </main>
   </body>
 </html>
