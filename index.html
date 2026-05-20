@@ -3,159 +3,370 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>自己紹介ページ</title>
+    <title>Miniature City</title>
     <style>
-      :root {
-        color-scheme: light;
-        --bg: #f7f7f8;
-        --panel: #ffffff;
-        --text: #1f2937;
-        --muted: #6b7280;
-        --accent: #2563eb;
-        --border: #e5e7eb;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
+      html,
       body {
+        width: 100%;
+        height: 100%;
         margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        line-height: 1.7;
+        overflow: hidden;
+        background: #0b1120;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
       }
 
-      .container {
-        max-width: 760px;
-        margin: 0 auto;
-        padding: 48px 20px 64px;
+      #app {
+        position: fixed;
+        inset: 0;
       }
 
-      .hero {
-        background: var(--panel);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 32px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-      }
-
-      h1 {
-        margin: 0 0 12px;
-        font-size: clamp(2rem, 4vw, 3rem);
-        line-height: 1.2;
-      }
-
-      .lead {
-        margin: 0;
-        color: var(--muted);
-        font-size: 1.05rem;
-      }
-
-      section {
-        margin-top: 24px;
-        background: var(--panel);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 24px 32px;
-      }
-
-      h2 {
-        margin: 0 0 12px;
-        font-size: 1.2rem;
-      }
-
-      ul {
-        margin: 0;
-        padding-left: 20px;
-      }
-
-      .profile {
-        display: grid;
-        gap: 12px;
-      }
-
-      .item {
-        display: grid;
-        grid-template-columns: 120px 1fr;
-        gap: 12px;
+      canvas {
+        display: block;
       }
 
       .label {
-        color: var(--muted);
-        font-weight: 600;
-      }
-
-      a {
-        color: var(--accent);
-        text-decoration: none;
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
-
-      @media (max-width: 640px) {
-        .hero,
-        section {
-          padding: 20px;
-          border-radius: 12px;
-        }
-
-        .item {
-          grid-template-columns: 1fr;
-          gap: 4px;
-        }
+        position: fixed;
+        left: 18px;
+        bottom: 16px;
+        color: rgba(240, 244, 255, 0.82);
+        font-size: 13px;
+        letter-spacing: 0;
+        user-select: none;
+        pointer-events: none;
+        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
       }
     </style>
   </head>
   <body>
-    <main class="container">
-      <header class="hero">
-        <h1>こんにちは、[あなたの名前]です。</h1>
-        <p class="lead">
-          ここは私の自己紹介ページです。シンプルに、見やすく、自分らしさが伝わる内容にしています。
-        </p>
-      </header>
+    <div id="app"></div>
+    <div class="label">Miniature city animation</div>
+    <script type="module">
+      import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
 
-      <section>
-        <h2>プロフィール</h2>
-        <div class="profile">
-          <div class="item">
-            <div class="label">名前</div>
-            <div>[あなたの名前]</div>
-          </div>
-          <div class="item">
-            <div class="label">出身</div>
-            <div>[出身地]</div>
-          </div>
-          <div class="item">
-            <div class="label">職業 / 学業</div>
-            <div>[職業や学校名]</div>
-          </div>
-          <div class="item">
-            <div class="label">趣味</div>
-            <div>[趣味をいくつか]</div>
-          </div>
-        </div>
-      </section>
+      const app = document.getElementById("app");
 
-      <section>
-        <h2>好きなこと</h2>
-        <ul>
-          <li>[例] 音楽を聴くこと</li>
-          <li>[例] 旅行すること</li>
-          <li>[例] コーディングやデザインを触ること</li>
-        </ul>
-      </section>
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.Fog(0x89a7ff, 18, 70);
+      scene.background = new THREE.Color(0x89a7ff);
 
-      <section>
-        <h2>ひとこと</h2>
-        <p>
-          [ここに自己紹介の一文を入れてください。]
-        </p>
-      </section>
-    </main>
+      const camera = new THREE.PerspectiveCamera(
+        45,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        200
+      );
+      camera.position.set(18, 16, 18);
+      camera.lookAt(0, 3, 0);
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.shadowMap.enabled = true;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      app.appendChild(renderer.domElement);
+
+      const ambient = new THREE.AmbientLight(0xdde7ff, 1.4);
+      scene.add(ambient);
+
+      const sun = new THREE.DirectionalLight(0xffffff, 2.4);
+      sun.position.set(12, 20, 10);
+      sun.castShadow = true;
+      sun.shadow.mapSize.set(2048, 2048);
+      sun.shadow.camera.left = -30;
+      sun.shadow.camera.right = 30;
+      sun.shadow.camera.top = 30;
+      sun.shadow.camera.bottom = -30;
+      scene.add(sun);
+
+      const moon = new THREE.PointLight(0x8fb3ff, 0, 30, 2);
+      moon.position.set(-14, 16, -10);
+      scene.add(moon);
+
+      const city = new THREE.Group();
+      scene.add(city);
+
+      const ground = new THREE.Mesh(
+        new THREE.CylinderGeometry(16, 17, 1.2, 64),
+        new THREE.MeshStandardMaterial({ color: 0x6ea96f, roughness: 1 })
+      );
+      ground.position.y = -0.6;
+      ground.receiveShadow = true;
+      city.add(ground);
+
+      const road = new THREE.Mesh(
+        new THREE.TorusGeometry(8.2, 1.05, 16, 64),
+        new THREE.MeshStandardMaterial({ color: 0x2e3440, roughness: 0.95 })
+      );
+      road.rotation.x = Math.PI / 2;
+      road.receiveShadow = true;
+      city.add(road);
+
+      const innerPlaza = new THREE.Mesh(
+        new THREE.CylinderGeometry(4.8, 5.4, 0.8, 6),
+        new THREE.MeshStandardMaterial({ color: 0x89c996, roughness: 1 })
+      );
+      innerPlaza.position.y = 0.1;
+      innerPlaza.rotation.y = Math.PI / 6;
+      city.add(innerPlaza);
+
+      const buildingMaterials = [
+        new THREE.MeshStandardMaterial({ color: 0x7a8ca6, roughness: 0.8 }),
+        new THREE.MeshStandardMaterial({ color: 0xd28f7d, roughness: 0.75 }),
+        new THREE.MeshStandardMaterial({ color: 0x8a7db8, roughness: 0.8 }),
+        new THREE.MeshStandardMaterial({ color: 0xc9a96b, roughness: 0.85 })
+      ];
+
+      const buildingPositions = [];
+      const grid = [
+        [-10, -8], [-6, -11], [-2, -9], [5, -10], [10, -7],
+        [-11, -1], [-8, 4], [-4, 7], [1, 9], [7, 8], [11, 2],
+        [-10, 9], [-5, 11], [3, 12], [9, 11], [12, -1]
+      ];
+
+      function addBuilding(x, z, w, h, d, materialIndex) {
+        const base = new THREE.Mesh(
+          new THREE.BoxGeometry(w, h, d),
+          buildingMaterials[materialIndex % buildingMaterials.length]
+        );
+        base.position.set(x, h / 2, z);
+        base.castShadow = true;
+        base.receiveShadow = true;
+        city.add(base);
+        buildingPositions.push(base);
+
+        if (Math.random() > 0.55) {
+          const roof = new THREE.Mesh(
+            new THREE.ConeGeometry(Math.max(w, d) * 0.55, h * 0.35, 4),
+            new THREE.MeshStandardMaterial({ color: 0x44515f, roughness: 0.9 })
+          );
+          roof.position.set(x, h + h * 0.17, z);
+          roof.rotation.y = Math.PI / 4;
+          roof.castShadow = true;
+          city.add(roof);
+        }
+
+        const windowLight = new THREE.PointLight(0xfff1ba, 0.65, 8, 2);
+        windowLight.position.set(x, h * 0.65, z + d * 0.35);
+        city.add(windowLight);
+      }
+
+      grid.forEach((point, index) => {
+        const [x, z] = point;
+        const height = 2.2 + (index % 5) * 0.8 + Math.random() * 2.6;
+        const width = 1.8 + (index % 3) * 0.5;
+        const depth = 1.7 + ((index + 1) % 4) * 0.45;
+        addBuilding(x, z, width, height, depth, index);
+      });
+
+      function addTree(x, z, scale = 1) {
+        const trunk = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.14 * scale, 0.18 * scale, 0.9 * scale, 6),
+          new THREE.MeshStandardMaterial({ color: 0x7b5a3d, roughness: 1 })
+        );
+        trunk.position.set(x, 0.45 * scale, z);
+        trunk.castShadow = true;
+        city.add(trunk);
+
+        const crown = new THREE.Mesh(
+          new THREE.SphereGeometry(0.62 * scale, 12, 10),
+          new THREE.MeshStandardMaterial({ color: 0x4f8f5b, roughness: 1 })
+        );
+        crown.position.set(x, 1.2 * scale, z);
+        crown.castShadow = true;
+        city.add(crown);
+      }
+
+      [
+        [-13, -5, 1.15], [-12, 6, 1], [-7, -13, 0.95], [0, -13, 1.1],
+        [6, -12, 0.9], [13, -4, 1.05], [12, 6, 1.2], [7, 13, 0.95],
+        [-4, 13, 1.15], [-12, 12, 1]
+      ].forEach(([x, z, s]) => addTree(x, z, s));
+
+      const streetLamps = [];
+      function addLamp(x, z, rot = 0) {
+        const pole = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.06, 0.08, 2.5, 8),
+          new THREE.MeshStandardMaterial({ color: 0x5a6470, roughness: 0.7 })
+        );
+        pole.position.set(x, 1.25, z);
+        pole.castShadow = true;
+        city.add(pole);
+
+        const arm = new THREE.Mesh(
+          new THREE.BoxGeometry(0.9, 0.06, 0.06),
+          pole.material
+        );
+        arm.position.set(x + Math.cos(rot) * 0.4, 2.35, z + Math.sin(rot) * 0.4);
+        arm.rotation.y = rot;
+        city.add(arm);
+
+        const bulb = new THREE.Mesh(
+          new THREE.SphereGeometry(0.1, 10, 8),
+          new THREE.MeshStandardMaterial({
+            color: 0xfff0b0,
+            emissive: 0xffd98a,
+            emissiveIntensity: 0.8
+          })
+        );
+        bulb.position.set(x + Math.cos(rot) * 0.85, 2.35, z + Math.sin(rot) * 0.85);
+        city.add(bulb);
+
+        const light = new THREE.PointLight(0xffdca6, 0.6, 6, 2);
+        light.position.copy(bulb.position);
+        city.add(light);
+        streetLamps.push(light);
+      }
+
+      for (let i = 0; i < 8; i += 1) {
+        const angle = (i / 8) * Math.PI * 2;
+        addLamp(Math.cos(angle) * 9.7, Math.sin(angle) * 9.7, angle + Math.PI);
+      }
+
+      function makeCar(color) {
+        const car = new THREE.Group();
+
+        const body = new THREE.Mesh(
+          new THREE.BoxGeometry(0.9, 0.3, 0.5),
+          new THREE.MeshStandardMaterial({ color, roughness: 0.45, metalness: 0.15 })
+        );
+        body.position.y = 0.3;
+        body.castShadow = true;
+        car.add(body);
+
+        const top = new THREE.Mesh(
+          new THREE.BoxGeometry(0.45, 0.22, 0.42),
+          new THREE.MeshStandardMaterial({ color: 0xf4f7ff, roughness: 0.25, metalness: 0.05 })
+        );
+        top.position.set(0.08, 0.52, 0);
+        top.castShadow = true;
+        car.add(top);
+
+        const wheelMat = new THREE.MeshStandardMaterial({ color: 0x1c1e24, roughness: 1 });
+        for (const x of [-0.28, 0.28]) {
+          for (const z of [-0.22, 0.22]) {
+            const wheel = new THREE.Mesh(
+              new THREE.CylinderGeometry(0.085, 0.085, 0.06, 12),
+              wheelMat
+            );
+            wheel.rotation.z = Math.PI / 2;
+            wheel.position.set(x, 0.12, z);
+            wheel.castShadow = true;
+            car.add(wheel);
+          }
+        }
+
+        const headLight = new THREE.PointLight(0xfff7d1, 0.8, 3, 2);
+        headLight.position.set(0.48, 0.34, 0);
+        car.add(headLight);
+
+        return car;
+      }
+
+      const cars = [
+        { mesh: makeCar(0xff6f61), speed: 0.28, offset: 0.0 },
+        { mesh: makeCar(0x48b7ff), speed: -0.22, offset: 2.1 }
+      ];
+
+      cars[0].mesh.position.set(8.2, 0, 0);
+      cars[1].mesh.position.set(-8.2, 0, 0);
+      scene.add(cars[0].mesh, cars[1].mesh);
+
+      const clouds = [];
+      function addCloud(x, y, z, scale) {
+        const cloud = new THREE.Group();
+        const material = new THREE.MeshStandardMaterial({
+          color: 0xf7fbff,
+          roughness: 1,
+          transparent: true,
+          opacity: 0.9
+        });
+        for (const [dx, dy, dz, r] of [
+          [0, 0, 0, 0.9],
+          [0.8, 0.1, 0.1, 0.7],
+          [-0.7, 0.05, -0.05, 0.65],
+          [0.15, 0.2, 0.4, 0.6]
+        ]) {
+          const puff = new THREE.Mesh(new THREE.SphereGeometry(r * scale, 12, 10), material);
+          puff.position.set(dx * scale, dy * scale, dz * scale);
+          cloud.add(puff);
+        }
+        cloud.position.set(x, y, z);
+        scene.add(cloud);
+        clouds.push(cloud);
+      }
+
+      addCloud(-18, 14, -8, 1.4);
+      addCloud(6, 18, -18, 1.8);
+      addCloud(17, 12, 8, 1.3);
+
+      const clock = new THREE.Clock();
+      const baseCamera = new THREE.Vector3(18, 16, 18);
+
+      function updateLighting(time) {
+        const dayMix = (Math.sin(time * 0.12) + 1) * 0.5;
+        const skyDay = new THREE.Color(0x89a7ff);
+        const skyNight = new THREE.Color(0x07111f);
+        scene.background = skyNight.clone().lerp(skyDay, dayMix);
+        scene.fog.color.copy(scene.background);
+
+        sun.intensity = 0.4 + dayMix * 2.0;
+        moon.intensity = 0.15 + (1 - dayMix) * 1.2;
+        ambient.intensity = 0.55 + dayMix * 0.95;
+
+        const sunAngle = time * 0.12 - Math.PI * 0.15;
+        sun.position.set(Math.cos(sunAngle) * 20, Math.sin(sunAngle) * 18 + 6, 10);
+        sun.color.setHSL(0.12 + dayMix * 0.08, 0.25, 0.92);
+        moon.color.setHSL(0.6, 0.4, 0.75);
+
+        for (const light of streetLamps) {
+          light.intensity = 0.25 + (1 - dayMix) * 1.2;
+        }
+      }
+
+      function animate() {
+        const elapsed = clock.getElapsedTime();
+        updateLighting(elapsed);
+
+        city.rotation.y = elapsed * 0.08;
+
+        cars.forEach((car, index) => {
+          const t = elapsed * car.speed + car.offset;
+          const angle = t * Math.PI * 2;
+          const radius = 8.2;
+          const x = Math.cos(angle) * radius;
+          const z = Math.sin(angle) * radius;
+          car.mesh.position.set(x, 0, z);
+          car.mesh.rotation.y = -angle + Math.PI / 2;
+
+          const bounce = Math.sin(elapsed * 6 + index) * 0.03;
+          car.mesh.position.y = bounce;
+        });
+
+        clouds.forEach((cloud, index) => {
+          cloud.position.x += 0.003 + index * 0.0015;
+          if (cloud.position.x > 24) cloud.position.x = -24;
+          cloud.rotation.y = Math.sin(elapsed * 0.2 + index) * 0.05;
+        });
+
+        camera.position.x = baseCamera.x + Math.sin(elapsed * 0.12) * 1.8;
+        camera.position.z = baseCamera.z + Math.cos(elapsed * 0.1) * 1.6;
+        camera.position.y = baseCamera.y + Math.sin(elapsed * 0.18) * 0.8;
+        camera.lookAt(0, 2.6, 0);
+
+        renderer.render(scene, camera);
+        requestAnimationFrame(animate);
+      }
+
+      animate();
+
+      window.addEventListener("resize", () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      });
+    </script>
   </body>
 </html>
