@@ -3,54 +3,179 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>自己紹介ページ</title>
+    <title>Let's enjoy bakery experience at home!</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="bread-scatter" aria-hidden="true">
+      <span class="bread bread-bagel"></span>
+      <span class="bread bread-croissant"></span>
+      <span class="bread bread-roll"></span>
+      <span class="bread bread-baguette"></span>
+      <span class="bread bread-melon"></span>
+      <span class="bread bread-loaf"></span>
+      <span class="bread bread-roll"></span>
+      <span class="bread bread-bagel"></span>
+      <span class="bread bread-baguette"></span>
+      <span class="bread bread-croissant"></span>
+      <span class="bread bread-melon"></span>
+      <span class="bread bread-loaf"></span>
+      <span class="bread bread-bagel"></span>
+      <span class="bread bread-roll"></span>
+      <span class="bread bread-croissant"></span>
+      <span class="bread bread-melon"></span>
+    </div>
     <main class="page">
       <header class="hero">
-        <p class="eyebrow">About Me</p>
-        <h1>こんにちは、[あなたの名前]です。</h1>
+        <p class="eyebrow">Bread Making Guide</p>
+        <h1>Let's enjoy bakery experience at home!</h1>
         <p class="lead">
-          ここは私の自己紹介ページです。やわらかい雰囲気で、落ち着いて読める構成にしています。
+          こねる時間、発酵の待ち時間、焼き上がりの香りまで。ベーグル、メロンパン、ちぎりパンを家で楽しめるレシピにまとめました。
         </p>
+        <div class="hero-meta">
+          <div>
+            <span class="meta-label">Recipes</span>
+            <strong>3種類</strong>
+          </div>
+          <div>
+            <span class="meta-label">Time</span>
+            <strong>約2〜3時間</strong>
+          </div>
+          <div>
+            <span class="meta-label">Style</span>
+            <strong>おうちベーカリー</strong>
+          </div>
+        </div>
       </header>
 
-      <section class="panel">
-        <h2>プロフィール</h2>
-        <dl class="profile">
-          <div>
-            <dt>名前</dt>
-            <dd>[あなたの名前]</dd>
-          </div>
-          <div>
-            <dt>出身</dt>
-            <dd>[出身地]</dd>
-          </div>
-          <div>
-            <dt>職業 / 学業</dt>
-            <dd>[職業や学校名]</dd>
-          </div>
-          <div>
-            <dt>趣味</dt>
-            <dd>[趣味をいくつか]</dd>
-          </div>
-        </dl>
+      <section class="panel intro-note">
+        <h2>今日作れるパン</h2>
+        <p>
+          もちっと噛みごたえのあるベーグル、クッキー生地をのせた甘いメロンパン、みんなで分けやすいふわふわのちぎりパン。
+          それぞれ家庭のオーブンで作りやすい分量にしています。
+        </p>
       </section>
 
-      <section class="panel soft">
-        <h2>好きなこと</h2>
-        <ul class="list">
-          <li>[例] 音楽を聴くこと</li>
-          <li>[例] 旅行すること</li>
-          <li>[例] コーディングやデザインを触ること</li>
-        </ul>
+      <section class="grid">
+        <section class="panel">
+          <h2>ベーグル</h2>
+          <p class="recipe-summary">ゆでてから焼くことで、表面はつやっと中はもっちり仕上がります。</p>
+          <dl class="profile">
+            <div>
+              <dt>強力粉</dt>
+              <dd>300g</dd>
+            </div>
+            <div>
+              <dt>砂糖</dt>
+              <dd>15g</dd>
+            </div>
+            <div>
+              <dt>塩</dt>
+              <dd>5g</dd>
+            </div>
+            <div>
+              <dt>ドライイースト</dt>
+              <dd>3g</dd>
+            </div>
+            <div>
+              <dt>ぬるま湯</dt>
+              <dd>180ml</dd>
+            </div>
+            <div>
+              <dt>ゆで湯用はちみつ</dt>
+              <dd>大さじ1</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="panel soft">
+          <h2>ベーグルの作り方</h2>
+          <ol class="steps compact">
+            <li><strong>こねる</strong><p>材料を混ぜ、表面がなめらかになるまで10分ほどこねます。</p></li>
+            <li><strong>発酵する</strong><p>丸めて40分ほど一次発酵し、4〜5等分にします。</p></li>
+            <li><strong>成形する</strong><p>棒状にのばして端をつなぎ、リング形にして15分休ませます。</p></li>
+            <li><strong>ゆでて焼く</strong><p>はちみつを入れた湯で片面30秒ずつゆで、200℃で15〜18分焼きます。</p></li>
+          </ol>
+        </section>
+      </section>
+
+      <section class="grid">
+        <section class="panel accent">
+          <h2>メロンパン</h2>
+          <p class="recipe-summary">ふんわりパン生地に、サクサクのクッキー生地をかぶせます。</p>
+          <dl class="profile">
+            <div>
+              <dt>パン生地</dt>
+              <dd>強力粉200g、砂糖20g、塩3g、イースト3g、牛乳130ml、バター20g</dd>
+            </div>
+            <div>
+              <dt>クッキー生地</dt>
+              <dd>薄力粉120g、砂糖45g、卵1/2個、バター45g</dd>
+            </div>
+            <div>
+              <dt>仕上げ</dt>
+              <dd>グラニュー糖 適量</dd>
+            </div>
+          </dl>
+          <ol class="steps compact">
+            <li><strong>パン生地を作る</strong><p>材料をこね、バターを加えてなめらかにし、40〜50分発酵します。</p></li>
+            <li><strong>クッキー生地を作る</strong><p>バター、砂糖、卵、薄力粉を順に混ぜ、冷蔵庫で休ませます。</p></li>
+            <li><strong>包む</strong><p>パン生地を6等分し、薄くのばしたクッキー生地をかぶせます。</p></li>
+            <li><strong>焼く</strong><p>表面に格子模様をつけ、グラニュー糖をまぶして180℃で14〜16分焼きます。</p></li>
+          </ol>
+        </section>
+
+        <section class="panel soft">
+          <h2>ちぎりパン</h2>
+          <p class="recipe-summary">型に並べて焼く、やわらかくて分けやすい食卓向きのパンです。</p>
+          <dl class="profile">
+            <div>
+              <dt>強力粉</dt>
+              <dd>250g</dd>
+            </div>
+            <div>
+              <dt>砂糖</dt>
+              <dd>25g</dd>
+            </div>
+            <div>
+              <dt>塩</dt>
+              <dd>4g</dd>
+            </div>
+            <div>
+              <dt>ドライイースト</dt>
+              <dd>3g</dd>
+            </div>
+            <div>
+              <dt>牛乳</dt>
+              <dd>170ml</dd>
+            </div>
+            <div>
+              <dt>バター</dt>
+              <dd>25g</dd>
+            </div>
+          </dl>
+          <ol class="steps compact">
+            <li><strong>こねる</strong><p>材料を混ぜてこね、最後にバターを加えてつやが出るまでまとめます。</p></li>
+            <li><strong>一次発酵</strong><p>あたたかい場所で40〜60分、生地が約2倍になるまで発酵します。</p></li>
+            <li><strong>並べる</strong><p>9〜12等分して丸め、型に少し間隔をあけて並べます。</p></li>
+            <li><strong>焼く</strong><p>20分ほど二次発酵し、170℃で18〜22分焼きます。</p></li>
+          </ol>
+        </section>
       </section>
 
       <section class="panel accent">
+        <h2>おいしく作る共通のコツ</h2>
+        <ul class="list">
+          <li>粉気が残るときは、水分を一度に足さず小さじ1ずつ調整する。</li>
+          <li>発酵時間は室温で変わるため、時間より生地の大きさと弾力を見る。</li>
+          <li>焼き色が早くつく場合は、途中でアルミホイルを軽くかぶせる。</li>
+        </ul>
+      </section>
+
+      <section class="panel footer-note">
         <h2>ひとこと</h2>
         <p>
-          [ここに自己紹介の一文を入れてください。]
+          焼きたての香りは、おうち時間を小さなベーカリーに変えてくれます。好きなパンから気軽に試してみてください。
         </p>
       </section>
     </main>

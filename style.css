@@ -1,15 +1,17 @@
 :root {
   color-scheme: light;
-  --bg-1: #f4ebe1;
-  --bg-2: #ead9c6;
-  --bg-3: #d8b899;
-  --panel: rgba(255, 248, 240, 0.72);
-  --panel-strong: rgba(255, 242, 227, 0.9);
-  --text: #4d3525;
-  --muted: #7b6454;
-  --border: rgba(118, 83, 58, 0.15);
-  --accent: #9a6641;
-  --accent-strong: #6f4631;
+  --bg-1: #f7efe7;
+  --bg-2: #ead8c5;
+  --bg-3: #d7b48f;
+  --bg-4: #b98963;
+  --panel: rgba(255, 248, 241, 0.78);
+  --panel-strong: rgba(255, 242, 230, 0.92);
+  --text: #4a3427;
+  --muted: #745e51;
+  --border: rgba(122, 87, 60, 0.16);
+  --accent: #9b6a47;
+  --accent-strong: #6f4a33;
+  --shadow: 0 18px 36px rgba(89, 58, 35, 0.12);
 }
 
 * {
@@ -24,12 +26,14 @@ body {
 }
 
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Yu Gothic UI", "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at top, rgba(255, 255, 255, 0.7), transparent 36%),
-    linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 54%, var(--bg-3) 100%);
+    radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.65), transparent 28%),
+    radial-gradient(circle at 80% 10%, rgba(255, 228, 203, 0.35), transparent 32%),
+    linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 42%, var(--bg-3) 74%, var(--bg-4) 100%);
   line-height: 1.8;
+  position: relative;
 }
 
 body::before {
@@ -38,17 +42,255 @@ body::before {
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 48px 48px;
-  opacity: 0.22;
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 90%);
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.18) 0 2px, transparent 3px),
+    radial-gradient(circle at 78% 26%, rgba(255, 255, 255, 0.12) 0 2px, transparent 3px),
+    radial-gradient(circle at 42% 76%, rgba(255, 255, 255, 0.08) 0 1px, transparent 2px);
+  background-size: 72px 72px;
+  opacity: 0.4;
+}
+
+.bread-scatter {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bread {
+  position: absolute;
+  display: block;
+  width: 42px;
+  height: 28px;
+  opacity: 0.58;
+  filter: drop-shadow(0 7px 10px rgba(91, 59, 36, 0.08));
+}
+
+.bread::before,
+.bread::after {
+  content: "";
+  position: absolute;
+  display: block;
+}
+
+.bread-scatter .bread:nth-child(1) {
+  left: 6vw;
+  top: 7vh;
+  transform: rotate(-24deg) scale(0.86);
+}
+
+.bread-scatter .bread:nth-child(2) {
+  left: 22vw;
+  top: 15vh;
+  transform: rotate(-18deg) scale(0.74);
+}
+
+.bread-scatter .bread:nth-child(3) {
+  left: 39vw;
+  top: 23vh;
+  transform: rotate(-20deg) scale(0.7);
+}
+
+.bread-scatter .bread:nth-child(4) {
+  left: 56vw;
+  top: 31vh;
+  transform: rotate(-21deg) scale(0.76);
+}
+
+.bread-scatter .bread:nth-child(5) {
+  left: 73vw;
+  top: 39vh;
+  transform: rotate(-17deg) scale(0.72);
+}
+
+.bread-scatter .bread:nth-child(6) {
+  left: 88vw;
+  top: 47vh;
+  transform: rotate(-24deg) scale(0.78);
+}
+
+.bread-scatter .bread:nth-child(7) {
+  left: -2vw;
+  top: 35vh;
+  transform: rotate(-22deg) scale(0.78);
+}
+
+.bread-scatter .bread:nth-child(8) {
+  left: 14vw;
+  top: 43vh;
+  transform: rotate(-18deg) scale(0.68);
+}
+
+.bread-scatter .bread:nth-child(9) {
+  left: 31vw;
+  top: 51vh;
+  transform: rotate(-25deg) scale(0.72);
+}
+
+.bread-scatter .bread:nth-child(10) {
+  left: 49vw;
+  top: 59vh;
+  transform: rotate(-17deg) scale(0.76);
+}
+
+.bread-scatter .bread:nth-child(11) {
+  left: 66vw;
+  top: 67vh;
+  transform: rotate(-21deg) scale(0.68);
+}
+
+.bread-scatter .bread:nth-child(12) {
+  left: 83vw;
+  top: 75vh;
+  transform: rotate(-19deg) scale(0.73);
+}
+
+.bread-scatter .bread:nth-child(13) {
+  left: 4vw;
+  top: 78vh;
+  transform: rotate(-18deg) scale(0.66);
+}
+
+.bread-scatter .bread:nth-child(14) {
+  left: 21vw;
+  top: 86vh;
+  transform: rotate(-23deg) scale(0.76);
+}
+
+.bread-scatter .bread:nth-child(15) {
+  left: 78vw;
+  top: 8vh;
+  transform: rotate(-20deg) scale(0.7);
+}
+
+.bread-scatter .bread:nth-child(16) {
+  left: 93vw;
+  top: 16vh;
+  transform: rotate(-17deg) scale(0.64);
+}
+
+.bread-bagel {
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 52%, transparent 0 8px, #f6e8d5 9px 12px, transparent 13px),
+    radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.48), transparent 30%),
+    linear-gradient(135deg, #e7bc89, #cf9364);
+}
+
+.bread-bagel::before {
+  inset: 9px 15px;
+  border-radius: 50%;
+  background: rgba(247, 239, 231, 0.72);
+  box-shadow: inset 0 2px 4px rgba(126, 78, 43, 0.12);
+}
+
+.bread-roll {
+  width: 38px;
+  height: 32px;
+  border-radius: 52% 48% 46% 54% / 48% 52% 46% 54%;
+  background:
+    radial-gradient(circle at 31% 25%, rgba(255, 255, 255, 0.46), transparent 26%),
+    linear-gradient(145deg, #f2cf9f, #d99e68);
+}
+
+.bread-roll::before,
+.bread-roll::after {
+  width: 20px;
+  height: 3px;
+  left: 10px;
+  border-radius: 999px;
+  background: rgba(151, 93, 52, 0.28);
+  transform: rotate(-25deg);
+}
+
+.bread-roll::before {
+  top: 11px;
+}
+
+.bread-roll::after {
+  top: 18px;
+}
+
+.bread-baguette {
+  width: 58px;
+  height: 17px;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, rgba(255, 244, 221, 0.45), transparent 28%),
+    linear-gradient(135deg, #e6b876, #c88350);
+}
+
+.bread-baguette::before {
+  inset: 4px 10px;
+  background:
+    linear-gradient(105deg, transparent 0 6px, rgba(255, 239, 208, 0.78) 7px 11px, transparent 12px 19px, rgba(255, 239, 208, 0.7) 20px 24px, transparent 25px);
+  border-radius: inherit;
+}
+
+.bread-croissant {
+  width: 48px;
+  height: 30px;
+}
+
+.bread-croissant::before {
+  left: 4px;
+  top: 3px;
+  width: 40px;
+  height: 22px;
+  border-radius: 50% 50% 46% 46%;
+  background:
+    radial-gradient(ellipse at 50% 78%, rgba(247, 239, 231, 0.92) 0 12px, transparent 13px),
+    linear-gradient(140deg, #efc48c, #cf8f58);
+}
+
+.bread-croissant::after {
+  left: 3px;
+  top: 9px;
+  width: 42px;
+  height: 12px;
+  border-radius: 999px;
+  background:
+    radial-gradient(ellipse at 18% 50%, #d99b61 0 9px, transparent 10px),
+    radial-gradient(ellipse at 50% 50%, #e9b777 0 10px, transparent 11px),
+    radial-gradient(ellipse at 82% 50%, #d0925d 0 9px, transparent 10px);
+}
+
+.bread-melon {
+  width: 36px;
+  height: 36px;
+  border-radius: 48% 52% 50% 50%;
+  background:
+    linear-gradient(45deg, transparent 0 42%, rgba(181, 128, 76, 0.18) 43% 48%, transparent 49%),
+    linear-gradient(-45deg, transparent 0 42%, rgba(181, 128, 76, 0.16) 43% 48%, transparent 49%),
+    radial-gradient(circle at 33% 24%, rgba(255, 255, 255, 0.48), transparent 28%),
+    linear-gradient(145deg, #f3dca9, #dbad72);
+  background-size: 13px 13px, 13px 13px, auto, auto;
+}
+
+.bread-loaf {
+  width: 43px;
+  height: 31px;
+  border-radius: 54% 54% 14px 14px / 58% 58% 13px 13px;
+  background:
+    radial-gradient(circle at 31% 25%, rgba(255, 255, 255, 0.5), transparent 27%),
+    linear-gradient(145deg, #efc895, #d19460);
+}
+
+.bread-loaf::before {
+  left: 8px;
+  right: 8px;
+  bottom: 7px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(126, 78, 43, 0.18);
 }
 
 .page {
-  width: min(880px, calc(100% - 32px));
+  width: min(980px, calc(100% - 32px));
   margin: 0 auto;
   padding: 56px 0 72px;
+  position: relative;
+  z-index: 1;
 }
 
 .hero,
@@ -57,17 +299,41 @@ body::before {
   border: 1px solid var(--border);
   border-radius: 20px;
   background: var(--panel);
-  box-shadow: 0 18px 36px rgba(92, 60, 36, 0.12);
+  box-shadow: var(--shadow);
   backdrop-filter: blur(10px);
 }
 
 .hero {
-  padding: 36px 34px 32px;
+  padding: 38px 36px 34px;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  right: -48px;
+  top: -40px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.45), transparent 48%),
+    linear-gradient(145deg, rgba(162, 111, 74, 0.28), rgba(255, 232, 210, 0.08));
+  filter: blur(2px);
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
 }
 
 .panel {
   margin-top: 22px;
   padding: 26px 34px;
+}
+
+.grid > .panel {
+  margin-top: 0;
 }
 
 .panel.soft {
@@ -76,6 +342,13 @@ body::before {
 
 .panel.accent {
   background: linear-gradient(180deg, rgba(255, 245, 234, 0.96), rgba(245, 223, 200, 0.92));
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 22px;
 }
 
 .eyebrow {
@@ -99,6 +372,7 @@ h1 {
   font-size: clamp(2rem, 4vw, 3.2rem);
   line-height: 1.18;
   letter-spacing: 0;
+  max-width: 12ch;
 }
 
 .lead {
@@ -106,6 +380,43 @@ h1 {
   max-width: 44rem;
   color: var(--muted);
   font-size: 1.02rem;
+}
+
+.intro-note p,
+.recipe-summary {
+  color: var(--muted);
+}
+
+.recipe-summary {
+  margin-bottom: 18px;
+}
+
+.hero-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.hero-meta > div {
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255, 250, 244, 0.72);
+  border: 1px solid rgba(122, 87, 60, 0.1);
+}
+
+.meta-label {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.hero-meta strong {
+  font-size: 1rem;
+  color: var(--accent-strong);
 }
 
 h2 {
@@ -121,7 +432,7 @@ h2 {
 
 .profile > div {
   display: grid;
-  grid-template-columns: 128px 1fr;
+  grid-template-columns: 118px 1fr;
   gap: 16px;
   align-items: start;
 }
@@ -144,14 +455,64 @@ dd {
   margin-top: 8px;
 }
 
+.steps {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.steps li + li {
+  margin-top: 16px;
+}
+
+.steps strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--accent-strong);
+}
+
+.steps p {
+  color: var(--muted);
+}
+
+.steps.compact {
+  margin-top: 18px;
+}
+
+.steps.compact li + li {
+  margin-top: 12px;
+}
+
 .accent p {
   color: var(--text);
 }
 
+.footer-note {
+  text-align: center;
+}
+
+.footer-note p {
+  max-width: 46rem;
+  margin: 0 auto;
+  color: var(--muted);
+}
+
 @media (max-width: 640px) {
+  .bread {
+    opacity: 0.42;
+  }
+
+  .bread-scatter .bread:nth-child(2n) {
+    display: none;
+  }
+
   .page {
     width: min(100% - 20px, 880px);
     padding: 20px 0 28px;
+  }
+
+  .grid,
+  .hero-meta {
+    grid-template-columns: 1fr;
   }
 
   .hero,
